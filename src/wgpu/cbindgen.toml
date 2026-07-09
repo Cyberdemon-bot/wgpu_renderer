@@ -1,0 +1,28 @@
+language = "C"
+
+header = """
+#pragma once
+#include "native_window/native_window.h"
+"""
+
+# Matches your current hand-written file: no include guards needed,
+# since `#pragma once` above (in `header`) already does the job.
+# (include_guard is a *name string* for a custom guard, not a toggle —
+# omitting it means cbindgen won't emit one at all.)
+pragma_once = false
+
+# Emit `extern "C" { ... }` wrapped in `#ifdef __cplusplus`, same as your
+# original rust_header.h, so main.cpp's C++ compiler links correctly.
+cpp_compat = true
+
+# C is the source of truth for NativeWindowHandle/NativePlatform —
+# they stay defined in native_window.h. Excluding them here means
+# cbindgen will reference them by name in the generated function
+# signatures (via the #include above) but never emit its own
+# struct/enum body for them.
+[export]
+exclude = ["NativeWindowHandle", "NativePlatform"]
+
+[fn]
+prefix = ""
+args = "auto"

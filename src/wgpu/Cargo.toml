@@ -1,0 +1,26 @@
+[profile.dev]
+lto = true
+codegen-units = 1
+
+[profile.release]
+lto = true
+codegen-units = 1
+
+[package]
+name = "wgpu"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+wgpu = "29.0"
+raw-window-handle = { version = "0.6", features = ["std"] }
+bytemuck = { version = "1", features = ["derive"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+anyhow = "1"
+pollster = "0.3"
+
+[build-dependencies]
+cbindgen = "0.29"
